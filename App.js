@@ -1,20 +1,56 @@
+
+
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import {NavigationContainer} from '@react-navigation/native';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import SignUpForm from './SignUpForm';
+import SignInForm from './SignInForm';
+import Dashboard from './Dashboard';
+
+import { getAuth, signOut } from 'firebase/auth';
+import { Button } from 'react-native';
+import { useEffect } from 'react';
+
+const Stack = createNativeStackNavigator();
 
 export default function App() {
+
+
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
+    <NavigationContainer>
       <StatusBar style="auto" />
-    </View>
+      <Stack.Navigator>
+        <Stack.Screen
+          name="SignIn"
+          component={SignInForm}
+          options={{title: 'Sign In'}}
+        />
+        <Stack.Screen
+          name="SignUp"
+          component={SignUpForm}
+          options={{title: 'Sign Up'}}
+        />
+        <Stack.Screen
+          name="Dashboard"
+          component={Dashboard}
+          options={({ navigation }) => ({
+            title: 'Dashboard', 
+            headerBackVisible: false,
+            headerRight: () => {
+              return (
+                <Button
+                  title="Logout"
+                  onPress={async () => {
+                    const auth = getAuth();
+                    await signOut(auth)
+                    navigation.navigate('SignIn')
+                  }}
+                />
+              )
+            }
+          })}
+        />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
