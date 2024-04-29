@@ -1,6 +1,6 @@
 
 
-import {  StyleSheet, Text, View, Dimensions, Pressable } from 'react-native';
+import {  StyleSheet, Text, View, Dimensions, Pressable, SafeAreaView, FlatList } from 'react-native';
 import { getAuth } from "firebase/auth";
 import { useEffect, useState } from 'react';
 import { getDatabase, ref, onValue, query, limitToLast,  orderByChild, equalTo  } from "firebase/database";
@@ -13,6 +13,12 @@ import {
 const db = getDatabase();
 
 
+const Item = ({value, date}) => (
+  <View style={styles.item}>
+    <Text style={{color: 'white' }}>{dayjs(date).format('MMMM DD, YYYY hh:mm:ss A')}</Text>
+    <Text style={{color: 'white' }}>{value}</Text>
+  </View>
+);
 const History = ({ navigation }) => {
   
   const [list, setList] = useState(null);
@@ -79,6 +85,14 @@ const History = ({ navigation }) => {
             }}
           />
       </View> : null}
+      {newList?.length > 0 ? 
+      <SafeAreaView style={styles.list}>
+        <FlatList
+          data={newList}
+          renderItem={({item}) => <Item date={item?.timestamp} value={item.value} />}
+          keyExtractor={item => item.id}
+        />
+      </SafeAreaView> : null}
       <Pressable style={styles.historyButton} onPress={onHandleBackToReader}>
         <Text style={{ color: 'white'}}>Sugar Reader</Text>
       </Pressable>    
@@ -109,12 +123,13 @@ const styles = StyleSheet.create({
     color: 'blue',
   },
   item: {
-    width: '100%',
+    width: Dimensions.get("window").width-100,
     display: 'flex',
     flexDirection: 'row',
     gap: 10,
     borderWidth: 1,
     padding: 5,
+    borderColor: 'white'
   },
   list: {
     height: '50%',
