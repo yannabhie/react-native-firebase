@@ -20,7 +20,7 @@ const Item = ({value, date}) => (
   </View>
 );
 
-const Dashboard = () => {
+const Dashboard = ({ navigation }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [sugarLevel, setSugarLevel] = useState(null);
   const [list, setList] = useState(null);
@@ -93,6 +93,10 @@ const Dashboard = () => {
     })
   }
 
+  const onHandleShowHistory = () => {
+    navigation.navigate('History')
+  }
+
   const newList = Object.values(list || {}).length > 0 ? Object.values(list).sort((a, b) => a.timestamp - b.timestamp) : []
   return (
     <View style={styles.container}>
@@ -110,45 +114,9 @@ const Dashboard = () => {
       <Pressable style={!isStartReading ? styles.startButton : styles.stopButton} onPress={onHandleSend}>
         <Text style={{ color: 'white'}}>{!isStartReading ? 'START' : 'STOP'}</Text>
       </Pressable>
-      {newList?.length > 0 ?
-      <View>
-        <LineChart
-            data={{
-              labels: newList.map((x) => dayjs(x?.timestamp).format('HH:mm')),
-              datasets: [
-                {
-                  data: newList.map(x => parseFloat(x?.value))
-                }
-              ]
-            }}
-            width={Dimensions.get("window").width} // from react-native
-            height={220}
-            yAxisLabel=""
-            yAxisSuffix=""
-            yAxisInterval={1} // optional, defaults to 1
-            chartConfig={{
-              backgroundColor: "#e26a00",
-              backgroundGradientFrom: "#fb8c00",
-              backgroundGradientTo: "#ffa726",
-              decimalPlaces: 2, // optional, defaults to 2dp
-              color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
-              labelColor: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
-              style: {
-                borderRadius: 16
-              },
-              propsForDots: {
-                r: "6",
-                strokeWidth: "2",
-                stroke: "#ffa726"
-              }
-            }}
-            bezier
-            style={{
-              marginVertical: 8,
-              borderRadius: 16
-            }}
-          />
-      </View> : null}
+      <Pressable style={styles.historyButton} onPress={onHandleShowHistory}>
+        <Text style={{ color: 'white'}}>Sugar Reading History</Text>
+      </Pressable>     
       {/* <SafeAreaView style={styles.list}>
         <FlatList
           data={Object.values(list || {})}
@@ -206,6 +174,17 @@ const styles = StyleSheet.create({
   },
   stopButton: {
     backgroundColor: 'red',
+    color: 'white',
+    padding: 10,
+    borderRadius: 5,
+    display: 'flex',
+    alignItems: 'center',
+    flexDirection: 'row',
+    marginTop: 20,
+    marginBottom: 20
+  },
+  historyButton: {
+    backgroundColor: 'blue',
     color: 'white',
     padding: 10,
     borderRadius: 5,

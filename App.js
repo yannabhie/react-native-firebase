@@ -10,6 +10,7 @@ import Dashboard from './Dashboard';
 import { getAuth, signOut } from 'firebase/auth';
 import { Button } from 'react-native';
 import { useEffect } from 'react';
+import History from './History';
 
 const Stack = createNativeStackNavigator();
 
@@ -35,6 +36,26 @@ export default function App() {
           component={Dashboard}
           options={({ navigation }) => ({
             title: 'Dashboard', 
+            headerBackVisible: false,
+            headerRight: () => {
+              return (
+                <Button
+                  title="Logout"
+                  onPress={async () => {
+                    const auth = getAuth();
+                    await signOut(auth)
+                    navigation.navigate('SignIn')
+                  }}
+                />
+              )
+            }
+          })}
+        />
+        <Stack.Screen
+          name="History"
+          component={History}
+          options={({ navigation }) => ({
+            title: 'History', 
             headerBackVisible: false,
             headerRight: () => {
               return (
