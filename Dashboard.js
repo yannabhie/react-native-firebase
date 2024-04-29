@@ -6,12 +6,7 @@ import { useEffect, useState } from 'react';
 import { getDatabase, ref, onValue, set, query, limitToLast, push, onChildAdded, orderByChild, equalTo, off  } from "firebase/database";
 import dayjs from 'dayjs';
 import {
-  LineChart,
-  BarChart,
-  PieChart,
-  ProgressChart,
-  ContributionGraph,
-  StackedBarChart
+  LineChart
 } from "react-native-chart-kit";
 
 
@@ -98,7 +93,7 @@ const Dashboard = () => {
     })
   }
 
-  
+  const newList = Object.values(list || {}).length > 0 ? Object.values(list).sort((a, b) => a.timestamp - b.timestamp) : []
   return (
     <View style={styles.container}>
       {isStartReading && isLoading ?
@@ -115,14 +110,14 @@ const Dashboard = () => {
       <Pressable style={!isStartReading ? styles.startButton : styles.stopButton} onPress={onHandleSend}>
         <Text style={{ color: 'white'}}>{!isStartReading ? 'START' : 'STOP'}</Text>
       </Pressable>
-      {Object.keys(list || [])?.length > 0 ?
+      {newList?.length > 0 ?
       <View>
         <LineChart
             data={{
-              labels: Object.keys(list || []).map((x) => dayjs(x).format('HH:mm')),
+              labels: newList.map((x) => dayjs(x?.timestamp).format('HH:mm')),
               datasets: [
                 {
-                  data: Object.values(list || []).map(x => parseFloat(x?.value))
+                  data: newList.map(x => parseFloat(x?.value))
                 }
               ]
             }}
