@@ -141,7 +141,7 @@ const styles = StyleSheet.create({
   textResult: {
     fontSize: 100,
     fontWeight: 'bold',
-    color: 'blue',
+    color: '#BDE8B5',
   },
   item: {
     width: '100%',
