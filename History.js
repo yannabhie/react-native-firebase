@@ -13,10 +13,12 @@ import {
 const db = getDatabase();
 
 
-const Item = ({value, date}) => (
+const Item = ({ value, date, fontSize, fontColor }) => (
   <View style={styles.item}>
-    <Text style={{color: 'white' }}>{dayjs(date).format('MMMM DD, YYYY hh:mm:ss A')}</Text>
-    <Text style={{color: 'white' }}>{value}</Text>
+    <Text style={[styles.date, { fontSize, color: fontColor }]}>
+      {dayjs(date).format('MM/DD/YYYY hh:mm:ss A')}
+    </Text>
+    <Text style={[styles.title, { fontSize, color: fontColor }]}>{value}</Text>
   </View>
 );
 const History = ({ navigation }) => {
@@ -44,7 +46,7 @@ const History = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <View style={{ margin: 10 }}>
-        <Text style={{ fontWeight: 'bold', fontSize: 20, color: 'blue' }}>{user?.providerData?.[0]?.email}</Text>
+        <Text style={{ fontWeight: 'bold', fontSize: 20, color: 'black' }}>{user?.providerData?.[0]?.email}</Text>
       </View>
       {newList?.length > 0 ?
       <View>
@@ -58,14 +60,14 @@ const History = ({ navigation }) => {
               ]
             }}
             width={Dimensions.get("window").width} // from react-native
-            height={220}
+            height={180}
             yAxisLabel=""
             yAxisSuffix=""
             yAxisInterval={1} // optional, defaults to 1
             chartConfig={{
-              backgroundColor: "#e26a00",
-              backgroundGradientFrom: "#fb8c00",
-              backgroundGradientTo: "#ffa726",
+              backgroundColor: "#ffffff",
+              backgroundGradientFrom: "#AED3D4",
+              backgroundGradientTo: "#3F9092",
               decimalPlaces: 2, // optional, defaults to 2dp
               color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
               labelColor: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
@@ -75,7 +77,7 @@ const History = ({ navigation }) => {
               propsForDots: {
                 r: "6",
                 strokeWidth: "2",
-                stroke: "#ffa726"
+                stroke: "black"
               }
             }}
             bezier
@@ -94,7 +96,7 @@ const History = ({ navigation }) => {
         />
       </SafeAreaView> : null}
       <Pressable style={styles.historyButton} onPress={onHandleBackToReader}>
-        <Text style={{ color: 'white'}}>Sugar Reader</Text>
+        <Text style={{ color: 'black'}}>Sugar Reader</Text>
       </Pressable>    
       {/* <SafeAreaView style={styles.list}>
         <FlatList
@@ -113,7 +115,7 @@ export default History
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fb8c00',
+    backgroundColor: '#AED3D4',
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -129,7 +131,7 @@ const styles = StyleSheet.create({
     gap: 10,
     borderWidth: 1,
     padding: 5,
-    borderColor: 'white'
+    borderColor: 'black',
   },
   list: {
     height: '50%',
@@ -139,6 +141,7 @@ const styles = StyleSheet.create({
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
+    color: 'black',
     
   },
   startButton: {
@@ -164,7 +167,7 @@ const styles = StyleSheet.create({
     marginBottom: 20
   },
   historyButton: {
-    backgroundColor: 'blue',
+    backgroundColor: 'white',
     color: 'white',
     padding: 10,
     borderRadius: 5,
@@ -176,4 +179,5 @@ const styles = StyleSheet.create({
   }
   
 });
+
 

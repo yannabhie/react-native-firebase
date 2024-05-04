@@ -31,7 +31,7 @@ const SignUpForm = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles?.title}>Sign Up</Text>
+      <Text style={styles?.title}>REGISTRATION</Text>
       <TextInput
         style={styles.input}
         placeholder="Email"
@@ -48,18 +48,19 @@ const SignUpForm = ({ navigation }) => {
         secureTextEntry
       />
       <View style={styles.buttonContainer}>
-        <Button color="white" title="Submit" onPress={handleSignUp} />
+        <Button color= '#8ec7c8' title="REGISTER" onPress={handleSignUp} />
       </View>
-      <Button title="Login" onPress={handleLogin} />
+      <Button color = '#8ec7c8' title="LOGIN" onPress={handleLogin} />
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   title: {
-    fontSize: 20,
+    fontSize: 40,
     fontWeight: 'bold',
-    marginBottom: 20,
+    marginBottom: 40,
+    color: '#9beaec',
   },
   container: {
     flex: 1,
@@ -78,8 +79,15 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-around',
     width: '80%',
-    backgroundColor: 'blue',
-    borderRadius: 5,
+    backgroundColor: '#bdf4f5',
+    borderRadius: 100,
+    marginTop: 40
+  },
+  container: {
+    flex: 1,
+    backgroundColor: '#ffffff',
+    alignItems: 'center',
+    justifyContent: 'center',
   }
 });
 

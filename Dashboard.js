@@ -109,7 +109,7 @@ const Dashboard = ({ navigation }) => {
       {isStartReading && sugarLevel ?
       <Text>Current Sugar Reading</Text> : null}
       <View style={{ margin: 10 }}>
-        <Text style={{ fontWeight: 'bold', fontSize: 20, color: 'blue' }}>{user?.providerData?.[0]?.email}</Text>
+        <Text style={{ fontWeight: 'bold', fontSize: 20, color: '#9beaec' }}>{user?.providerData?.[0]?.email}</Text>
       </View>
       <Pressable style={!isStartReading ? styles.startButton : styles.stopButton} onPress={onHandleSend}>
         <Text style={{ color: 'white'}}>{!isStartReading ? 'START' : 'STOP'}</Text>
@@ -162,15 +162,15 @@ const styles = StyleSheet.create({
     
   },
   startButton: {
-    backgroundColor: 'blue',
-    color: 'white',
+    backgroundColor: '#9beaec',
+    color: '#8ec7c8',
     padding: 10,
-    borderRadius: 5,
+    borderRadius: 100,
     display: 'flex',
     alignItems: 'center',
     flexDirection: 'row',
     marginTop: 20,
-    marginBottom: 20
+    marginBottom: 20,
   },
   stopButton: {
     backgroundColor: 'red',
@@ -184,10 +184,10 @@ const styles = StyleSheet.create({
     marginBottom: 20
   },
   historyButton: {
-    backgroundColor: 'blue',
-    color: 'white',
+    backgroundColor: '#9beaec',
+    color: '#8ec7c8',
     padding: 10,
-    borderRadius: 5,
+    borderRadius: 100,
     display: 'flex',
     alignItems: 'center',
     flexDirection: 'row',

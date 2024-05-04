@@ -15,27 +15,38 @@ import History from './History';
 const Stack = createNativeStackNavigator();
 
 export default function App() {
-
-
   return (
     <NavigationContainer>
       <StatusBar style="auto" />
       <Stack.Navigator>
-        <Stack.Screen
-          name="SignIn"
-          component={SignInForm}
-          options={{title: 'Sign In'}}
-        />
+      <Stack.Screen
+        name="SignIn"
+        component={SignInForm}
+        options={{
+          title: 'Sign In',
+          headerTitleStyle: {
+            color: '#9beaec',
+          },
+        }}
+      />
         <Stack.Screen
           name="SignUp"
           component={SignUpForm}
-          options={{title: 'Sign Up'}}
+          options={{
+            title: 'Sign Up',
+            headerTitleStyle: {
+              color: '#9beaec',
+            },
+          }}
         />
         <Stack.Screen
           name="Dashboard"
           component={Dashboard}
           options={({ navigation }) => ({
-            title: 'Dashboard', 
+            title: 'Dashboard',
+            headerTitleStyle: {
+              color: '#9beaec',
+            }, 
             headerBackVisible: false,
             headerRight: () => {
               return (
@@ -56,6 +67,9 @@ export default function App() {
           component={History}
           options={({ navigation }) => ({
             title: 'History', 
+            headerTitleStyle: {
+              color: '#9beaec',
+            },
             headerBackVisible: false,
             headerRight: () => {
               return (
@@ -75,3 +89,4 @@ export default function App() {
     </NavigationContainer>
   );
 }
+

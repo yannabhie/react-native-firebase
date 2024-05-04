@@ -9,8 +9,8 @@ import fb from './fb';
 fb()
 
 const SignInForm = ({ navigation }) => {
-  const [email, setEmail] = useState('juan@yopmail.com');
-  const [password, setPassword] = useState('Abc@1234');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
   const handleSignUp = () => {
     navigation.navigate('SignUp')
@@ -38,7 +38,7 @@ const SignInForm = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles?.title}>Sign In</Text>
+      <Text style={styles?.title}>WELCOME</Text>
       <TextInput
         style={styles.input}
         placeholder="Email"
@@ -55,18 +55,20 @@ const SignInForm = ({ navigation }) => {
         secureTextEntry
       />
       <View style={styles.buttonContainer}>
-        <Button color="white" title="Submit" onPress={handleLogin} />
+        <Button color="#8ec7c8" title="LOGIN" onPress={handleLogin} />
       </View>
-      <Button title="Sign Up" onPress={handleSignUp} />
+      <Button color = "#8ec7c8" title="REGISTER" onPress={handleSignUp} />
     </View>
+    
   );
 };
 
 const styles = StyleSheet.create({
   title: {
-    fontSize: 20,
+    fontSize: 40,
     fontWeight: 'bold',
-    marginBottom: 20,
+    marginBottom: 40,
+    color: '#9beaec',
   },
   container: {
     flex: 1,
@@ -85,8 +87,15 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-around',
     width: '80%',
-    backgroundColor: 'blue',
-    borderRadius: 5,
+    backgroundColor: '#bdf4f5',
+    borderRadius: 100,
+    marginTop: 40
+  },
+  container: {
+    flex: 1,
+    backgroundColor: '#ffffff',
+    alignItems: 'center',
+    justifyContent: 'center',
   }
 });
 
